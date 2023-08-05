@@ -40,12 +40,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Docker meta
-        id: <meta_id> # you'll use this in the next step
+        id: metril_vdoninja # you'll use this in the next step
         uses: docker/metadata-action@v3
         with:
           # list of Docker images to use as base name for tags
           images: |
-            <specify the image name>
+            ghcr.io/metril/metril_vdoninja
           # Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -61,5 +61,5 @@ jobs:
           context: .
           platforms: linux/amd64, linux/arm64, linux/arm/v7
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.<meta_id>.outputs.tags }}
-          labels: ${{ steps.<meta_id>.outputs.labels }}
+          tags: ${{ steps.metril_vdoninja.outputs.tags }}
+          labels: ${{ steps.metril_vdoninja.outputs.labels }}
